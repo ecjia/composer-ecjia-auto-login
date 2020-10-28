@@ -18,13 +18,19 @@ class AuthLoginDecrypt
     protected $authcode;
 
     /**
+     * @var integer
+     */
+    protected $timeout;
+
+    /**
      * AuthLoginDecrypt constructor.
      * @param $authcode
      * @param $authkey
      */
-    public function __construct($authcode, $encrypter = null)
+    public function __construct($authcode, $encrypter = null, $timeout = 30)
     {
         $this->authcode = $authcode;
+        $this->timeout = $timeout;
 
         if (is_null($encrypter)) {
             $this->encrypter = app('encrypter');
@@ -34,7 +40,10 @@ class AuthLoginDecrypt
         }
     }
 
-
+    /**
+     * @return array
+     * @throws AutoLoginException
+     */
     public function decrypt()
     {
         $authcode_decrypt = $this->encrypter->decrypt($this->authcode);
@@ -47,7 +56,7 @@ class AuthLoginDecrypt
         $gm_timestamp = mktime(gmdate("H, i, s, m, d, Y"));
         $time_gap = $gm_timestamp - $start_time;
 
-        if (intval($time_gap) > 30) {
+        if (intval($time_gap) > $this->timeout) {
             throw new AutoLoginException('抱歉！请求超时。');
         }
 
