@@ -4,8 +4,6 @@
 namespace Ecjia\Component\AutoLogin;
 
 use Illuminate\Encryption\Encrypter;
-use RC_Crypt;
-use RC_Time;
 
 class AuthLoginEncrypt
 {
@@ -29,7 +27,7 @@ class AuthLoginEncrypt
         $this->params = $params;
 
         if (is_null($encrypter)) {
-            $this->encrypter = royalcms('encrypter');
+            $this->encrypter = app('encrypter');
         }
         else {
             $this->encrypter = $encrypter;
@@ -39,7 +37,8 @@ class AuthLoginEncrypt
 
     public function encrypt()
     {
-        $this->params['time'] = RC_Time::gmtime();
+        $gm_timestamp = mktime(gmdate("H, i, s, m, d, Y")); // UTC time
+        $this->params['time'] = $gm_timestamp;
 
         $authcode_str = http_build_query($this->params);
         $authcode = $this->encrypter->encrypt($authcode_str);

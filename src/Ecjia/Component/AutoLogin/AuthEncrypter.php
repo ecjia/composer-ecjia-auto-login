@@ -11,7 +11,7 @@ class AuthEncrypter
     /**
      * @var string
      */
-    protected $authkey;
+    protected $auth_key;
 
     /**
      * @var string
@@ -20,31 +20,29 @@ class AuthEncrypter
 
     /**
      * AuthEncrypter constructor.
-     * @param string $authkey
-     * @param string $cipher
+     * @param string|null $authkey
+     * @param string|null $cipher
      */
-    public function __construct(?string $authkey = null, ?string $cipher = null)
+    public function __construct(?string $auth_key = null, ?string $cipher = null)
     {
-        $this->authkey = $authkey ?: config('system.auth_key');
-        $this->cipher  = $cipher ?: config('system.cipher');
+        $this->auth_key = $auth_key ?: config('app.auth_key');
+        $this->cipher  = $cipher ?: config('app.cipher');
     }
 
     /**
      * @return string
      */
-    public function getAuthkey(): string
+    public function getAuthKey(): string
     {
-        return $this->authkey;
+        return $this->auth_key;
     }
 
     /**
-     * @param string $authkey
-     * @return AuthEncrypter
+     * @param string $auth_key
      */
-    public function setAuthkey(string $authkey): AuthEncrypter
+    public function setAuthKey(string $auth_key): void
     {
-        $this->authkey = $authkey;
-        return $this;
+        $this->auth_key = $auth_key;
     }
 
     /**
@@ -70,7 +68,7 @@ class AuthEncrypter
      */
     public function getEncrypter()
     {
-        return new Encrypter($this->authkey, $this->cipher);
+        return new Encrypter($this->auth_key, $this->cipher);
     }
 
 }

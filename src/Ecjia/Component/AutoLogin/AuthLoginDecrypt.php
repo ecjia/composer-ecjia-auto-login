@@ -4,8 +4,6 @@
 namespace Ecjia\Component\AutoLogin;
 
 use Illuminate\Encryption\Encrypter;
-use RC_Crypt;
-use RC_Time;
 
 class AuthLoginDecrypt
 {
@@ -29,7 +27,7 @@ class AuthLoginDecrypt
         $this->authcode = $authcode;
 
         if (is_null($encrypter)) {
-            $this->encrypter = royalcms('encrypter');
+            $this->encrypter = app('encrypter');
         }
         else {
             $this->encrypter = $encrypter;
@@ -46,11 +44,11 @@ class AuthLoginDecrypt
 
         $start_time = $params['time'];
 
-        $time     = RC_Time::gmtime();
-        $time_gap = $time - $start_time;
+        $gm_timestamp = mktime(gmdate("H, i, s, m, d, Y"));
+        $time_gap = $gm_timestamp - $start_time;
 
         if (intval($time_gap) > 30) {
-            throw new AutoLoginException(__('抱歉！请求超时。', 'ecjia'));
+            throw new AutoLoginException('抱歉！请求超时。');
         }
 
         return $params;
