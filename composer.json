@@ -1,0 +1,31 @@
+{
+    "name": "ecjia/auto-login",
+    "description": "The Ecjia Auto-login package.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "http://ecjia.com",
+    "support": {
+        "issues": "https://github.com/ecjia/composer-ecjia-framework/issues",
+        "source": "https://github.com/ecjia/composer-ecjia-framework"
+    },
+    "authors": [
+        {
+            "name": "Royal Wang",
+            "email": "hxroyal@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ecjia\\Component\\AutoLogin\\": "src/Ecjia/Component/AutoLogin"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}
