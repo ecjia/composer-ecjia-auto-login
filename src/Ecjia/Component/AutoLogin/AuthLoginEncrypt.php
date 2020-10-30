@@ -20,9 +20,9 @@ class AuthLoginEncrypt
     /**
      * AuthLoginEncrypt constructor.
      * @param array $params
-     * @param $authkey
+     * @param AuthEncrypter|null $encrypter
      */
-    public function __construct($params, $encrypter = null)
+    public function __construct($params, AuthEncrypter $encrypter = null)
     {
         $this->params = $params;
 
@@ -30,7 +30,7 @@ class AuthLoginEncrypt
             $this->encrypter = app('encrypter');
         }
         else {
-            $this->encrypter = $encrypter;
+            $this->encrypter = $encrypter->getEncrypter();
         }
     }
 
