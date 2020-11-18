@@ -37,7 +37,7 @@ class AuthLoginEncrypt
 
     public function encrypt()
     {
-        $gm_timestamp = mktime(gmdate("H, i, s, m, d, Y")); // UTC time
+        $gm_timestamp = mktime(gmdate("H"), gmdate("i"), gmdate("s"), gmdate("m"), gmdate("d"), gmdate("Y")); // UTC time
         $this->params['time'] = $gm_timestamp;
 
         $authcode_str = http_build_query($this->params);
