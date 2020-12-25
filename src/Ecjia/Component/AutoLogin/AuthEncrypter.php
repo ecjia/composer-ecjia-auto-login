@@ -6,7 +6,7 @@ namespace Ecjia\Component\AutoLogin;
 
 use Illuminate\Encryption\Encrypter;
 
-class AuthEncrypter
+class AuthEncrypter implements AuthEncrypterInterface
 {
     /**
      * @var string
