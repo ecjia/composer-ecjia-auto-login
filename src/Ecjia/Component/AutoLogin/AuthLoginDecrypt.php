@@ -25,10 +25,10 @@ class AuthLoginDecrypt
     /**
      * AuthLoginDecrypt constructor.
      * @param $authcode
-     * @param AuthEncrypter|null $encrypter
+     * @param AuthEncrypterInterface|null $encrypter
      * @param int $timeout
      */
-    public function __construct($authcode, AuthEncrypter $encrypter = null, $timeout = 30)
+    public function __construct($authcode, AuthEncrypterInterface $encrypter = null, $timeout = 30)
     {
         $this->authcode = $authcode;
         $this->timeout = $timeout;

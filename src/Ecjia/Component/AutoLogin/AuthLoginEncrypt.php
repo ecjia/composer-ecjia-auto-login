@@ -20,9 +20,9 @@ class AuthLoginEncrypt
     /**
      * AuthLoginEncrypt constructor.
      * @param array $params
-     * @param AuthEncrypter|null $encrypter
+     * @param AuthEncrypterInterface|null $encrypter
      */
-    public function __construct($params, AuthEncrypter $encrypter = null)
+    public function __construct($params, AuthEncrypterInterface $encrypter = null)
     {
         $this->params = $params;
 
